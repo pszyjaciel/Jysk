@@ -1,0 +1,4 @@
+
+idlj -fall jysk.idl 
+
+

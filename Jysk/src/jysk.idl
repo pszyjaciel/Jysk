@@ -1,0 +1,43 @@
+module jysk
+{
+	struct Article
+	{
+		long articleid;
+		string articlename;
+		double articleweight;
+	};
+
+	struct Pallet
+	{
+		long palletid;
+		long articleid;
+		double articleamount;
+		double palletweight;
+	};
+
+	interface GoodsInput
+	{
+		void putOnBelt(in Pallet pal);
+	};
+
+	interface Crane
+	{
+		void takeFromBelt(in Pallet pal);
+	};
+
+
+	interface Controller
+	{
+		boolean addArticle(in Article art);
+		boolean addPallet(in Pallet pal);
+
+		Article getArticle(in long articleid);
+		Pallet getPallet(in long palletid);
+
+		typedef sequence<Article> artSequence;
+		artSequence getArtList();
+
+		typedef sequence<Pallet> palSequence;
+		palSequence getPalList();
+	};
+};  

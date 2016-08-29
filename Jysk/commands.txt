@@ -1,0 +1,45 @@
+
+Commands:
+cd /cygdrive/c/eclipse/Workspaces/SDJI3Workspace/Jysk/src
+
+
+Compile the .java files:
+
+javac -d ../bin \
+	jni/*.java \
+	jysk/*.java \
+	jysk/ControllerPackage/*.java \
+	services/*.java \
+	tier1/*.java \
+	tier2/*.java \
+	tier3/*.java 
+
+
+Create JNI header file:
+javah -d jni/ jni.NativeMethods
+
+
+Compile the .c file using the gcc compiler:
+i686-w64-mingw32-gcc -D__int64="long long" -I'c:/Progra~1/Java/jdk1.7.0_45/include' \
+-I'c:/Progra~1/Java/jdk1.7.0_45/include/win32' -Wl,--add-stdcall-alias -shared \
+-o c:/eclipse/Workspaces/SDJI3Workspace/Jysk/jars/NativeLib.dll \
+c:/eclipse/Workspaces/SDJI3Workspace/Jysk/src/jni/sum.c \
+c:/eclipse/Workspaces/SDJI3Workspace/Jysk/src/jni/NativeMethods.c
+
+
+Create the jar-files:
+cclient.jardesc 
+cserver.jardesc 
+rclient.jardesc 
+rserver.jardesc 
+
+
+Tu run the programs:
+cd c:\eclipse\Workspaces\SDJI3Workspace\Jysk\jars\
+corba_server.bat 
+rmi_server.bat 
+rcraneclient.bat 
+rctrlclient.bat 
+rgoodsclient.bat 
+
+
